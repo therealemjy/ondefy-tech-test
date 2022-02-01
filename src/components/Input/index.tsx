@@ -8,14 +8,12 @@ export interface InputProps
 
 const Input: React.FC<InputProps> = ({
   label,
-  value,
-  onChange,
   className,
   note,
   ...inputProps
 }) => (
   <Styles.Container className={className}>
-    <Styles.Label>{label}</Styles.Label>
+    <Styles.Label htmlFor={inputProps.name}>{label}</Styles.Label>
 
     <Styles.Input {...inputProps} />
 

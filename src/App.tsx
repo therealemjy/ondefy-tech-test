@@ -15,6 +15,8 @@ function App() {
   const [fromTokenId, setFromTokenId] = useState<Token["id"]>(tokens[0].id);
   const [toTokenId, setToTokenId] = useState<Token["id"]>(tokens[1].id);
 
+  const [amount, setAmount] = useState("1000");
+
   const handleFromTokenIdChange = (newFromTokenId: Token["id"]) => {
     setFromTokenId(newFromTokenId);
 
@@ -74,8 +76,8 @@ function App() {
         <Exchanger
           networks={networks}
           tokens={tokens}
-          amount={0}
-          onAmountChange={() => {}}
+          amount={amount}
+          onAmountChange={setAmount}
           networkKey={networkKey}
           onNetworkKeyChange={setNetworkKey}
           fromTokenId={fromTokenId}

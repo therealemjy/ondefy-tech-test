@@ -9,8 +9,8 @@ import * as Styles from "./styles";
 export interface ExchangerProps extends React.HTMLAttributes<HTMLDivElement> {
   networks: Network[];
   tokens: Token[];
-  amount: number;
-  onAmountChange: (newAmount: number) => void;
+  amount: string;
+  onAmountChange: (newAmount: string) => void;
   networkKey: Network["networkKey"];
   onNetworkKeyChange: (networkKey: Network["networkKey"]) => void;
   onFromTokenIdChange: (tokenId: Token["id"]) => void;
@@ -27,6 +27,8 @@ const Exchanger: React.FC<ExchangerProps> = ({
   onNetworkKeyChange,
   onFromTokenIdChange,
   onToTokenIdChange,
+  onAmountChange,
+  amount,
   fromTokenId,
   toTokenId,
   onSubmit,
@@ -101,8 +103,11 @@ const Exchanger: React.FC<ExchangerProps> = ({
           <Input
             label="Amount to send"
             note="Balance: 0.04ETH"
+            value={amount}
             type="number"
             min="0"
+            name="amount-sent"
+            onChange={(e) => onAmountChange(e.currentTarget.value)}
           />
         </Styles.Column>
       </Styles.Row>
@@ -128,6 +133,7 @@ const Exchanger: React.FC<ExchangerProps> = ({
             label="You will receive (est.)"
             note="Balance: 0.04ETH"
             type="number"
+            name="amount-received"
             disabled
           />
         </Styles.Column>
