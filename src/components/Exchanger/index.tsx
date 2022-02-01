@@ -15,11 +15,13 @@ const Exchanger: React.FC<ExchangerProps> = ({ ...containerProps }) => {
   }));
 
   return (
-    <Styles.Container {...containerProps}>
+    // TODO: remove inline-style once dev completed
+    <Styles.Container {...containerProps} style={{ height: "400px" }}>
       <Select
         label="Swap from"
         options={options}
-        selectedOptionValue={options[0].value}
+        value={options[0].value}
+        onChange={() => {}}
       />
     </Styles.Container>
   );
