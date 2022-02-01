@@ -1,0 +1,54 @@
+.App {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+h1,
+h2,
+p {
+	color: white;
+}
+
+h2 {
+	margin-top: 30px;
+}
+
+span {
+	color: #8fead7;
+}
+
+ul {
+	color: white;
+}
+
+img {
+	width: 100%;
+	max-width: 500px;
+	height: auto;
+}
+
+.chevron {
+	width: 15px;
+	height: auto;
+	color: white;
+	margin-left: 10px;
+}
+
+.flex-item {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.half-container {
+	width: 40%;
+	padding: 20px 5%;
+}
+
+@media screen and (max-width: 1200px) {
+	.half-container {
+		width: 100%;
+	}
+}
