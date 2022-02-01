@@ -10,9 +10,7 @@ export const Container = styled.div`
   display: inline-block;
 `;
 
-export const Label = styled.label<{
-  for: string; // Styled Components' typing is incorrect and does not include the "for" prop
-}>`
+export const Label = styled.label`
   ${fontStyles.caption};
 
   display: block;

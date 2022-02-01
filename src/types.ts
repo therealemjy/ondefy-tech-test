@@ -1,9 +1,9 @@
 export interface Token {
+  id: string;
   address: string;
   amount: number;
   amountUSD: number;
   networkKey: string;
-  id: string;
   label: string;
   logoURI: string;
   price: number;

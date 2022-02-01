@@ -3,7 +3,7 @@ import * as Styles from "./styles";
 
 export interface Option {
   label: string;
-  value: string | number;
+  value: string;
   imageURI: string;
 }
 
@@ -41,7 +41,7 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <Styles.Container {...containerProps}>
-      <Styles.Label for="dropdown-toggle">{label}</Styles.Label>
+      <Styles.Label htmlFor="dropdown-toggle">{label}</Styles.Label>
 
       <Styles.Item
         type="button"

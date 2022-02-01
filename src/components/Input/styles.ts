@@ -32,6 +32,19 @@ export const Input = styled.input`
     outline: 0;
     border-color: ${Palette.turquoise};
   }
+
+  // Hide side arrows on number inputs
+  // Chrome, Safari, Edge, Opera
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  // Firefox
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
 `;
 
 export const Note = styled.span`

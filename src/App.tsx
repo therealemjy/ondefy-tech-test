@@ -42,7 +42,18 @@ function App() {
       <div className="half-container">
         <h2>Please display the result below</h2>
 
-        <Exchanger networks={networks} tokens={tokens} />
+        <Exchanger
+          networks={networks}
+          tokens={tokens}
+          amount={0}
+          onAmountChange={() => {}}
+          networkKey="ethereum"
+          onNetworkKeyChange={() => {}}
+          onFromTokenIdChange={() => {}}
+          onToTokenIdChange={() => {}}
+          fromTokenId="ethereum"
+          toTokenId="usd-coin"
+        />
       </div>
     </div>
   );
