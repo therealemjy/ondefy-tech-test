@@ -55,15 +55,17 @@ const Select: React.FC<SelectProps> = ({
 
       {isDropdownDisplayed && (
         <Styles.Dropdown>
-          {options.map((option) => (
-            <Styles.DropdownItem
-              type="button"
-              onClick={() => selectOption(option.value)}
-            >
-              <Styles.ItemImage src={option.imageURI} />
-              <Styles.ItemLabel>{option.label}</Styles.ItemLabel>
-            </Styles.DropdownItem>
-          ))}
+          {options
+            .filter((option) => option.value !== value)
+            .map((option) => (
+              <Styles.DropdownItem
+                type="button"
+                onClick={() => selectOption(option.value)}
+              >
+                <Styles.ItemImage src={option.imageURI} />
+                <Styles.ItemLabel>{option.label}</Styles.ItemLabel>
+              </Styles.DropdownItem>
+            ))}
         </Styles.Dropdown>
       )}
     </Styles.Container>

@@ -1,13 +1,25 @@
-// TODO: pass down through props
-import { tokens } from "../../data";
+import { Network, Token } from "../../types";
 import Select from "../Select";
 import Input from "../Input";
 import Button from "../Button";
 import * as Styles from "./styles";
 
-export interface ExchangerProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface ExchangerProps extends React.HTMLAttributes<HTMLDivElement> {
+  networks: Network[];
+  tokens: Token[];
+}
 
-const Exchanger: React.FC<ExchangerProps> = ({ ...containerProps }) => {
+const Exchanger: React.FC<ExchangerProps> = ({
+  networks,
+  tokens,
+  ...containerProps
+}) => {
+  const networkOptions = networks.map((network) => ({
+    label: network.name,
+    value: network.networkKey,
+    imageURI: network.logoURI,
+  }));
+
   const options = tokens.map((token) => ({
     label: token.symbol,
     value: token.address,
@@ -28,9 +40,9 @@ const Exchanger: React.FC<ExchangerProps> = ({ ...containerProps }) => {
 
         <Styles.RightColumn>
           <Select
-            label="Swap from"
-            options={options}
-            value={options[0].value}
+            label="Network"
+            options={networkOptions}
+            value={networkOptions[0].value}
             onChange={() => {}}
           />
         </Styles.RightColumn>

@@ -1,6 +1,7 @@
 import { ChevronDown } from "@styled-icons/heroicons-outline";
 
 import "./App.css";
+import { networks, tokens } from "./data";
 import ExampleImg from "./assets/img/example.png";
 import Exchanger from "./components/Exchanger";
 
@@ -41,7 +42,7 @@ function App() {
       <div className="half-container">
         <h2>Please display the result below</h2>
 
-        <Exchanger />
+        <Exchanger networks={networks} tokens={tokens} />
       </div>
     </div>
   );
