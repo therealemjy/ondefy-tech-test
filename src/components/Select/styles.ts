@@ -7,6 +7,7 @@ import BASE_SIZE from "../../constants/baseSize";
 
 export const Container = styled.div`
   position: relative;
+  display: inline-block;
 `;
 
 export const Label = styled.label<{
@@ -15,10 +16,11 @@ export const Label = styled.label<{
   ${fontStyles.caption};
 
   display: block;
+  margin-bottom: ${BASE_SIZE / 2}px;
 `;
 
 export const Item = styled.button`
-  display: inline-flex;
+  display: flex;
   align-items: center;
   background-color: transparent;
   border: 0;
@@ -50,7 +52,7 @@ export const Dropdown = styled.div`
   flex-direction: column;
   position: absolute;
   left: -${BASE_SIZE * 2}px; // Compensate for items' left padding
-  top: calc(100% + ${BASE_SIZE}px);
+  top: 100%;
   border-radius: ${BASE_SIZE * 2}px;
   background-color: ${Palette.obsidianGrey};
 `;

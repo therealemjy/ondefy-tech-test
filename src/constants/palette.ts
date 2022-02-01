@@ -3,7 +3,8 @@ enum Palette {
   obsidianGrey = "#1a242c",
   pigeonGrey = "#ABADB0",
   white = "#ffffff",
-  turquoise = "#8fead7",
+  paleGreen = "#538A87",
+  turquoise = "#65CEC9",
 }
 
 export default Palette;
