@@ -1,11 +1,40 @@
+import { useState } from "react";
 import { ChevronDown } from "@styled-icons/heroicons-outline";
 
 import "./App.css";
+import { Network, Token } from "./types";
 import { networks, tokens } from "./data";
 import ExampleImg from "./assets/img/example.png";
 import Exchanger from "./components/Exchanger";
 
 function App() {
+  const [networkKey, setNetworkKey] = useState<Network["networkKey"]>(
+    networks[0].networkKey
+  );
+
+  const [fromTokenId, setFromTokenId] = useState<Token["id"]>(tokens[0].id);
+  const [toTokenId, setToTokenId] = useState<Token["id"]>(tokens[1].id);
+
+  const handleFromTokenIdChange = (newFromTokenId: Token["id"]) => {
+    setFromTokenId(newFromTokenId);
+
+    // Update toTokenId so it is different from fromTokenId in case user
+    // selected two similar tokens
+    if (newFromTokenId === toTokenId) {
+      setToTokenId(fromTokenId);
+    }
+  };
+
+  const handleToTokenIdChange = (newToTokenId: Token["id"]) => {
+    setToTokenId(newToTokenId);
+
+    // Update fromTokenId so it is different from toTokenId in case user
+    // selected two similar tokens
+    if (newToTokenId === fromTokenId) {
+      setFromTokenId(toTokenId);
+    }
+  };
+
   return (
     <div className="App">
       <div className="half-container">
@@ -47,12 +76,12 @@ function App() {
           tokens={tokens}
           amount={0}
           onAmountChange={() => {}}
-          networkKey="ethereum"
-          onNetworkKeyChange={() => {}}
-          onFromTokenIdChange={() => {}}
-          onToTokenIdChange={() => {}}
-          fromTokenId="ethereum"
-          toTokenId="usd-coin"
+          networkKey={networkKey}
+          onNetworkKeyChange={setNetworkKey}
+          fromTokenId={fromTokenId}
+          onFromTokenIdChange={handleFromTokenIdChange}
+          toTokenId={toTokenId}
+          onToTokenIdChange={handleToTokenIdChange}
           onSubmit={() => {}}
         />
       </div>
