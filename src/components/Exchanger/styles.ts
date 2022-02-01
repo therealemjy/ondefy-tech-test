@@ -10,3 +10,16 @@ export const Container = styled.div`
   -webkit-box-shadow: 0 0 14px 0 ${Palette.paleGreen};
   box-shadow: 0 0 14px 0 ${Palette.paleGreen};
 `;
+
+export const Row = styled.div`
+  display: flex;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex: 1;
+`;
+
+export const RightColumn = styled(Column)`
+  justify-content: flex-end;
+`;
