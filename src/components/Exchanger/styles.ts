@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ArrowDown } from "@styled-icons/heroicons-outline";
 
 import BASE_SIZE from "../../constants/baseSize";
 import Palette from "../../constants/palette";
@@ -12,7 +13,9 @@ export const Container = styled.div`
 `;
 
 export const Row = styled.div`
+  width: 100%;
   display: flex;
+  margin-bottom: ${BASE_SIZE * 4}px;
 `;
 
 export const Column = styled.div`
@@ -22,4 +25,18 @@ export const Column = styled.div`
 
 export const RightColumn = styled(Column)`
   justify-content: flex-end;
+`;
+
+export const SwapDirectionRow = styled(Row)`
+  justify-content: center;
+  padding: ${BASE_SIZE * 4}px 0;
+`;
+
+export const SwapDirectionIcon = styled(ArrowDown)`
+  width: ${BASE_SIZE * 6}px;
+  height: ${BASE_SIZE * 6}px;
+`;
+
+export const ReceivedAmountRow = styled(Row)`
+  margin-bottom: ${BASE_SIZE * 8}px;
 `;

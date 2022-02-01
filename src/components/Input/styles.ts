@@ -4,7 +4,9 @@ import * as fontStyles from "../../constants/fontStyles";
 import Palette from "../../constants/palette";
 import BASE_SIZE from "../../constants/baseSize";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  width: 100%;
+`;
 
 export const Label = styled.label`
   ${fontStyles.caption};

@@ -55,8 +55,13 @@ export const Dropdown = styled.div`
   top: 100%;
   border-radius: ${BASE_SIZE * 2}px;
   background-color: ${Palette.obsidianGrey};
+  overflow: hidden;
 `;
 
 export const DropdownItem = styled(Item)`
   padding: ${BASE_SIZE * 2}px;
+
+  &:hover {
+    background-color: ${Palette.turquoise};
+  }
 `;
