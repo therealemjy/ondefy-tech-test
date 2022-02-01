@@ -59,7 +59,7 @@ const Exchanger: React.FC<ExchangerProps> = ({ ...containerProps }) => {
 
       <Styles.ReceivedAmountRow>
         <Styles.Column>
-          <Input label="Amount to send" note="Balance: 0.04ETH" />
+          <Input label="Amount to send" note="Balance: 0.04ETH" disabled />
         </Styles.Column>
       </Styles.ReceivedAmountRow>
 

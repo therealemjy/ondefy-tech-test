@@ -5,7 +5,7 @@ enum Palette {
   pigeonGrey = "#ABADB0",
   white = "#ffffff",
   paleGreen = "#538A87",
-  turquoise = "#65CEC9",
+  turquoise = "#64B0AC",
 }
 
 export default Palette;

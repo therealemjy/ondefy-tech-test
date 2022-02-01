@@ -24,6 +24,10 @@ export const Input = styled.input`
   padding: ${BASE_SIZE * 3}px ${BASE_SIZE * 2}px;
   color: ${Palette.white};
 
+  &:disabled {
+    border-color: ${Palette.pigeonGrey};
+  }
+
   &:focus-visible {
     outline: 0;
     border-color: ${Palette.turquoise};
