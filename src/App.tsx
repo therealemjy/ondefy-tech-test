@@ -1,6 +1,8 @@
 import { ChevronDown } from "@styled-icons/heroicons-outline";
+
 import "./App.css";
 import ExampleImg from "./assets/img/example.png";
+import Exchanger from "./components/Exchanger";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
       </div>
       <div className="half-container">
         <h2>Please display the result below</h2>
+
+        <Exchanger />
       </div>
     </div>
   );
