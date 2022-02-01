@@ -4,6 +4,7 @@ import { useState } from "react";
 import { tokens } from "../../data";
 import Select from "../Select";
 import Input from "../Input";
+import Button from "../Button";
 import * as Styles from "./styles";
 
 export interface ExchangerProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -33,6 +34,9 @@ const Exchanger: React.FC<ExchangerProps> = ({ ...containerProps }) => {
         onChange={(e) => setInputValue(e.currentTarget.value)}
         note="Balance: 0.0ETH"
       />
+
+      <Button value="Set amounts" />
+      <Button value="Set amounts" disabled />
     </Styles.Container>
   );
 };

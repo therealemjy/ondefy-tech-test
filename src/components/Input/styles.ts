@@ -14,6 +14,7 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
+  display: block;
   width: 100%;
   border: 2px solid ${Palette.paleGreen};
   background-color: transparent;
