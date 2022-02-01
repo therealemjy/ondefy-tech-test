@@ -19,8 +19,7 @@ const Exchanger: React.FC<ExchangerProps> = ({ ...containerProps }) => {
   }));
 
   return (
-    // TODO: remove inline-style once dev completed
-    <Styles.Container {...containerProps} style={{ height: "400px" }}>
+    <Styles.Container {...containerProps}>
       <Select
         label="Swap from"
         options={options}
