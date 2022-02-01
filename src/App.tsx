@@ -15,7 +15,7 @@ function App() {
   const [fromTokenId, setFromTokenId] = useState<Token["id"]>(tokens[0].id);
   const [toTokenId, setToTokenId] = useState<Token["id"]>(tokens[1].id);
 
-  const [amount, setAmount] = useState("1000");
+  const [amount, setAmount] = useState("0");
 
   const handleFromTokenIdChange = (newFromTokenId: Token["id"]) => {
     setFromTokenId(newFromTokenId);
