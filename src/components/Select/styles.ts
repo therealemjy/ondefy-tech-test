@@ -34,9 +34,8 @@ export const ItemImage = styled.img`
 `;
 
 export const ItemLabel = styled.span`
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: ${Palette.white};
+  ${fontStyles.smallTitle};
+
   margin-right: ${BASE_SIZE * 3}px;
 `;
 
