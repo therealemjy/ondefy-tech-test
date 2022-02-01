@@ -1,11 +1,20 @@
 import styled from "styled-components";
 import { ChevronDown } from "@styled-icons/heroicons-outline";
 
+import * as fontStyles from "../../constants/fontStyles";
 import Palette from "../../constants/palette";
 import BASE_SIZE from "../../constants/baseSize";
 
 export const Container = styled.div`
   position: relative;
+`;
+
+export const Label = styled.label<{
+  for: string; // Styled Components' typing is incorrect and does not include the "for" prop
+}>`
+  ${fontStyles.caption};
+
+  display: block;
 `;
 
 export const Item = styled.button`

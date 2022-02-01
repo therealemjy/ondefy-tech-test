@@ -41,7 +41,13 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <Styles.Container {...containerProps}>
-      <Styles.Item type="button" onClick={toggleDropdown}>
+      <Styles.Label for="dropdown-toggle">{label}</Styles.Label>
+
+      <Styles.Item
+        type="button"
+        onClick={toggleDropdown}
+        name="dropdown-toggle"
+      >
         <Styles.ItemImage src={selectedOption?.imageURI} />
         <Styles.ItemLabel>{selectedOption?.label}</Styles.ItemLabel>
         <Styles.ItemCaret />
