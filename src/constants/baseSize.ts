@@ -1,2 +1,2 @@
-const BASE_SIZE = 8;
+const BASE_SIZE = 4;
 export default BASE_SIZE;
