@@ -53,6 +53,7 @@ function App() {
           onToTokenIdChange={() => {}}
           fromTokenId="ethereum"
           toTokenId="usd-coin"
+          onSubmit={() => {}}
         />
       </div>
     </div>

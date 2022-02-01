@@ -17,6 +17,7 @@ export interface ExchangerProps extends React.HTMLAttributes<HTMLDivElement> {
   onToTokenIdChange: (tokenId: Token["id"]) => void;
   fromTokenId: Token["id"];
   toTokenId: Token["id"];
+  onSubmit: () => void;
 }
 
 const Exchanger: React.FC<ExchangerProps> = ({
@@ -28,6 +29,7 @@ const Exchanger: React.FC<ExchangerProps> = ({
   onToTokenIdChange,
   fromTokenId,
   toTokenId,
+  onSubmit,
   ...containerProps
 }) => {
   const networkOptions = useMemo(
@@ -131,7 +133,7 @@ const Exchanger: React.FC<ExchangerProps> = ({
         </Styles.Column>
       </Styles.ReceivedAmountRow>
 
-      <Button value="Set amounts" disabled />
+      <Button value="Set amounts" onClick={onSubmit} disabled />
     </Styles.Container>
   );
 };
