@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { Network, Token } from "../../types";
+import { Network, Token, Swap } from "../../types";
 import Select from "../Select";
 import Input from "../Input";
 import Button from "../Button";
@@ -8,18 +8,19 @@ import getBalanceContent from "./getBalanceContent";
 import formatAmount from "../../utils/formatAmount";
 import * as Styles from "./styles";
 
-export interface ExchangerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ExchangerProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSubmit"> {
   networks: Network[];
   tokens: Token[];
-  amount: string;
-  onAmountChange: (newAmount: string) => void;
+  amountIn: string;
+  onAmountInChange: (newAmount: string) => void;
   networkKey: Network["networkKey"];
   onNetworkKeyChange: (networkKey: Network["networkKey"]) => void;
-  onFromTokenIdChange: (tokenId: Token["id"]) => void;
-  onToTokenIdChange: (tokenId: Token["id"]) => void;
-  fromTokenId: Token["id"];
-  toTokenId: Token["id"];
-  onSubmit: () => void;
+  onTokenInIdChange: (tokenId: Token["id"]) => void;
+  onTokenOutIdChange: (tokenId: Token["id"]) => void;
+  tokenInId: Token["id"];
+  tokenOutId: Token["id"];
+  onSubmit: (swap: Swap) => void;
 }
 
 const Exchanger: React.FC<ExchangerProps> = ({
@@ -27,15 +28,24 @@ const Exchanger: React.FC<ExchangerProps> = ({
   networks,
   networkKey,
   onNetworkKeyChange,
-  onFromTokenIdChange,
-  onToTokenIdChange,
-  onAmountChange,
-  amount: amountSent,
-  fromTokenId,
-  toTokenId,
+  onTokenInIdChange,
+  onTokenOutIdChange,
+  onAmountInChange,
+  amountIn,
+  tokenInId,
+  tokenOutId,
   onSubmit,
   ...containerProps
 }) => {
+  const handleSubmit = () =>
+    onSubmit({
+      tokenIn,
+      tokenOut,
+      amountIn,
+      minExpectedAmountOut: expectedAmountOut,
+      networkKey,
+    });
+
   const networkOptions = useMemo(
     () =>
       networks.map((network) => ({
@@ -64,19 +74,21 @@ const Exchanger: React.FC<ExchangerProps> = ({
     [tokens]
   );
 
-  const fromToken = useMemo(
-    () => tokens.find((token) => token.id === fromTokenId) || tokens[0],
-    [tokens, fromTokenId]
+  const tokenIn = useMemo(
+    () => tokens.find((token) => token.id === tokenInId) || tokens[0],
+    [tokens, tokenInId]
   );
 
-  const toToken = useMemo(
-    () => tokens.find((token) => token.id === toTokenId) || tokens[1],
-    [tokens, toTokenId]
+  const tokenOut = useMemo(
+    () => tokens.find((token) => token.id === tokenOutId) || tokens[1],
+    [tokens, tokenOutId]
   );
 
-  const amountReceived = formatAmount(
-    (parseFloat(amountSent) * fromToken.price) / toToken.price
+  const expectedAmountOut = formatAmount(
+    (parseFloat(amountIn) * tokenIn.price) / tokenOut.price
   );
+
+  const canSubmit = !!amountIn && amountIn !== "0";
 
   return (
     <Styles.Container {...containerProps}>
@@ -85,8 +97,8 @@ const Exchanger: React.FC<ExchangerProps> = ({
           <Select
             label="Swap from"
             options={tokenOptions}
-            value={fromToken.id}
-            onChange={(newFromTokenId) => onFromTokenIdChange(newFromTokenId)}
+            value={tokenIn.id}
+            onChange={(newTokenInId) => onTokenInIdChange(newTokenInId)}
           />
         </Styles.Column>
 
@@ -104,12 +116,12 @@ const Exchanger: React.FC<ExchangerProps> = ({
         <Styles.Column>
           <Input
             label="Amount to send"
-            note={getBalanceContent(fromToken)}
-            value={amountSent}
+            note={getBalanceContent(tokenIn)}
+            value={amountIn}
             type="number"
             min="0"
-            name="amount-sent"
-            onChange={(e) => onAmountChange(e.currentTarget.value)}
+            name="amount-in"
+            onChange={(e) => onAmountInChange(e.currentTarget.value)}
           />
         </Styles.Column>
       </Styles.Row>
@@ -123,8 +135,8 @@ const Exchanger: React.FC<ExchangerProps> = ({
           <Select
             label="Swap to"
             options={tokenOptions}
-            value={toToken.id}
-            onChange={(newToTokenId) => onToTokenIdChange(newToTokenId)}
+            value={tokenOut.id}
+            onChange={(newTokenOutId) => onTokenOutIdChange(newTokenOutId)}
           />
         </Styles.Column>
       </Styles.Row>
@@ -133,16 +145,20 @@ const Exchanger: React.FC<ExchangerProps> = ({
         <Styles.Column>
           <Input
             label="You will receive (est.)"
-            note={getBalanceContent(toToken)}
+            note={getBalanceContent(tokenOut)}
             type="number"
-            name="amount-received"
-            value={amountReceived}
+            name="expected-amount-out"
+            value={expectedAmountOut}
             disabled
           />
         </Styles.Column>
       </Styles.ReceivedAmountRow>
 
-      <Button value="Set amounts" onClick={onSubmit} disabled />
+      <Button
+        value={canSubmit ? "Swap" : "Set amounts"}
+        onClick={handleSubmit}
+        disabled={!canSubmit}
+      />
     </Styles.Container>
   );
 };

@@ -15,3 +15,11 @@ export interface Network {
   logoURI: string;
   name: string;
 }
+
+export interface Swap {
+  tokenIn: Token;
+  tokenOut: Token;
+  amountIn: string;
+  minExpectedAmountOut: string;
+  networkKey: Network["networkKey"];
+}

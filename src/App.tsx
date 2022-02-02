@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ChevronDown } from "@styled-icons/heroicons-outline";
 
 import "./App.css";
-import { Network, Token } from "./types";
+import { Network, Token, Swap } from "./types";
 import { networks, tokens } from "./data";
 import ExampleImg from "./assets/img/example.png";
 import Exchanger from "./components/Exchanger";
@@ -12,29 +12,35 @@ function App() {
     networks[0].networkKey
   );
 
-  const [fromTokenId, setFromTokenId] = useState<Token["id"]>(tokens[0].id);
-  const [toTokenId, setToTokenId] = useState<Token["id"]>(tokens[1].id);
+  const [tokenInId, setTokenInId] = useState<Token["id"]>(tokens[0].id);
+  const [tokenOutId, setTokenOutId] = useState<Token["id"]>(tokens[1].id);
 
-  const [amount, setAmount] = useState("0");
+  const [amountIn, setAmountIn] = useState("0");
 
-  const handleFromTokenIdChange = (newFromTokenId: Token["id"]) => {
-    setFromTokenId(newFromTokenId);
+  const handleTokenInIdChange = (newTokenInId: Token["id"]) => {
+    setTokenInId(newTokenInId);
 
-    // Update toTokenId so it is different from fromTokenId in case user
+    // Update tokenOutId so it is different from tokenInId in case user
     // selected two similar tokens
-    if (newFromTokenId === toTokenId) {
-      setToTokenId(fromTokenId);
+    if (newTokenInId === tokenOutId) {
+      setTokenOutId(tokenInId);
     }
   };
 
-  const handleToTokenIdChange = (newToTokenId: Token["id"]) => {
-    setToTokenId(newToTokenId);
+  const handleTokenOutIdChange = (newTokenOutId: Token["id"]) => {
+    setTokenOutId(newTokenOutId);
 
-    // Update fromTokenId so it is different from toTokenId in case user
+    // Update tokenInId so it is different from tokenOutId in case user
     // selected two similar tokens
-    if (newToTokenId === fromTokenId) {
-      setFromTokenId(toTokenId);
+    if (newTokenOutId === tokenInId) {
+      setTokenInId(tokenOutId);
     }
+  };
+
+  const handleSubmit = (swap: Swap) => {
+    console.log("New transaction");
+    console.log(swap);
+    alert("Check the console!");
   };
 
   return (
@@ -76,15 +82,15 @@ function App() {
         <Exchanger
           networks={networks}
           tokens={tokens}
-          amount={amount}
-          onAmountChange={setAmount}
+          amountIn={amountIn}
+          onAmountInChange={setAmountIn}
           networkKey={networkKey}
           onNetworkKeyChange={setNetworkKey}
-          fromTokenId={fromTokenId}
-          onFromTokenIdChange={handleFromTokenIdChange}
-          toTokenId={toTokenId}
-          onToTokenIdChange={handleToTokenIdChange}
-          onSubmit={() => {}}
+          tokenInId={tokenInId}
+          onTokenInIdChange={handleTokenInIdChange}
+          tokenOutId={tokenOutId}
+          onTokenOutIdChange={handleTokenOutIdChange}
+          onSubmit={handleSubmit}
         />
       </div>
     </div>
