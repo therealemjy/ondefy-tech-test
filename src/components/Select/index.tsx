@@ -61,6 +61,7 @@ const Select: React.FC<SelectProps> = ({
               <Styles.DropdownItem
                 type="button"
                 onClick={() => selectOption(option.value)}
+                key={`dropdown-item-${option.value}`}
               >
                 <Styles.ItemImage src={option.imageURI} />
                 <Styles.ItemLabel>{option.label}</Styles.ItemLabel>
