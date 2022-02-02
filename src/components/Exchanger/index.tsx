@@ -37,7 +37,10 @@ const Exchanger: React.FC<ExchangerProps> = ({
   onSubmit,
   ...containerProps
 }) => {
-  const handleSubmit = () =>
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    // Prevent page from reloading
+    e.preventDefault();
+
     onSubmit({
       tokenIn,
       tokenOut,
@@ -45,6 +48,10 @@ const Exchanger: React.FC<ExchangerProps> = ({
       minExpectedAmountOut: expectedAmountOut,
       networkKey,
     });
+
+    // Reset form
+    onAmountInChange("0");
+  };
 
   const networkOptions = useMemo(
     () =>
@@ -92,73 +99,75 @@ const Exchanger: React.FC<ExchangerProps> = ({
 
   return (
     <Styles.Container {...containerProps}>
-      <Styles.Row>
-        <Styles.Column>
-          <Select
-            label="Swap from"
-            options={tokenOptions}
-            value={tokenIn.id}
-            onChange={(newTokenInId) => onTokenInIdChange(newTokenInId)}
-          />
-        </Styles.Column>
+      <form onSubmit={handleSubmit}>
+        <Styles.Row>
+          <Styles.Column>
+            <Select
+              label="Swap from"
+              options={tokenOptions}
+              value={tokenIn.id}
+              onChange={(newTokenInId) => onTokenInIdChange(newTokenInId)}
+            />
+          </Styles.Column>
 
-        <Styles.RightColumn>
-          <Select
-            label="Network"
-            options={networkOptions}
-            value={selectedNetworkOption.value}
-            onChange={(newNetworkKey) => onNetworkKeyChange(newNetworkKey)}
-          />
-        </Styles.RightColumn>
-      </Styles.Row>
+          <Styles.RightColumn>
+            <Select
+              label="Network"
+              options={networkOptions}
+              value={selectedNetworkOption.value}
+              onChange={(newNetworkKey) => onNetworkKeyChange(newNetworkKey)}
+            />
+          </Styles.RightColumn>
+        </Styles.Row>
 
-      <Styles.Row>
-        <Styles.Column>
-          <Input
-            label="Amount to send"
-            note={getBalanceContent(tokenIn)}
-            value={amountIn}
-            type="number"
-            min="0"
-            name="amount-in"
-            onChange={(e) => onAmountInChange(e.currentTarget.value)}
-          />
-        </Styles.Column>
-      </Styles.Row>
+        <Styles.Row>
+          <Styles.Column>
+            <Input
+              label="Amount to send"
+              note={getBalanceContent(tokenIn)}
+              value={amountIn}
+              type="number"
+              min="0"
+              name="amount-in"
+              onChange={(e) => onAmountInChange(e.currentTarget.value)}
+            />
+          </Styles.Column>
+        </Styles.Row>
 
-      <Styles.SwapDirectionRow>
-        <Styles.SwapDirectionIcon />
-      </Styles.SwapDirectionRow>
+        <Styles.SwapDirectionRow>
+          <Styles.SwapDirectionIcon />
+        </Styles.SwapDirectionRow>
 
-      <Styles.Row>
-        <Styles.Column>
-          <Select
-            label="Swap to"
-            options={tokenOptions}
-            value={tokenOut.id}
-            onChange={(newTokenOutId) => onTokenOutIdChange(newTokenOutId)}
-          />
-        </Styles.Column>
-      </Styles.Row>
+        <Styles.Row>
+          <Styles.Column>
+            <Select
+              label="Swap to"
+              options={tokenOptions}
+              value={tokenOut.id}
+              onChange={(newTokenOutId) => onTokenOutIdChange(newTokenOutId)}
+            />
+          </Styles.Column>
+        </Styles.Row>
 
-      <Styles.ReceivedAmountRow>
-        <Styles.Column>
-          <Input
-            label="You will receive (est.)"
-            note={getBalanceContent(tokenOut)}
-            type="number"
-            name="expected-amount-out"
-            value={expectedAmountOut}
-            disabled
-          />
-        </Styles.Column>
-      </Styles.ReceivedAmountRow>
+        <Styles.ReceivedAmountRow>
+          <Styles.Column>
+            <Input
+              label="You will receive (est.)"
+              note={getBalanceContent(tokenOut)}
+              type="number"
+              name="expected-amount-out"
+              value={expectedAmountOut}
+              disabled
+            />
+          </Styles.Column>
+        </Styles.ReceivedAmountRow>
 
-      <Button
-        value={canSubmit ? "Swap" : "Set amounts"}
-        onClick={handleSubmit}
-        disabled={!canSubmit}
-      />
+        <Button
+          value={canSubmit ? "Swap" : "Set amounts"}
+          disabled={!canSubmit}
+          type="submit"
+        />
+      </form>
     </Styles.Container>
   );
 };
